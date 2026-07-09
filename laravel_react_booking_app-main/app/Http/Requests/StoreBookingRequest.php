@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class StoreSkillRequest extends FormRequest
+class StoreBookingRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,10 +22,11 @@ class StoreSkillRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'min:3', 'max:20'],
-            'slug' => [
-            'required',
-            Rule::unique('skills', 'slug')->ignore($this->skill)
-        ]];
+            'customer_name' => ['required', 'min:3', 'max:100'],
+            'booking_code' => [
+                'required',
+                Rule::unique('bookings', 'booking_code')->ignore($this->booking),
+            ],
+        ];
     }
 }
